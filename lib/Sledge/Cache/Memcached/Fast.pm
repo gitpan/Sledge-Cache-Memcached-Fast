@@ -4,7 +4,7 @@ use warnings;
 require Sledge::Cache;
 use base 'Sledge::Cache';
 use 5.00800;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use Cache::Memcached::Fast;
 
 our $Expires = 24 * 60 * 60; # 24hour
@@ -37,9 +37,14 @@ sub _remove {
     $self->{_memd}->delete($key);
 }
 
-sub get_multi {
-    my ( $self, @keys ) = @_;
-    $self->{_memd}->get_multi(@keys);
+{
+    no strict 'refs';
+    for my $method (qw/get_multi incr decr get set set_multi/) {
+        *{__PACKAGE__ . "::${method}"} = sub {
+            my $self = shift;
+            $self->{_memd}->$method(@_);
+        };
+    }
 }
 
 

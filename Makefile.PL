@@ -7,6 +7,7 @@ requires 'Cache::Memcached::Fast' => 0.10;
 
 tests 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t';
 test_requires 'Test::More';
+test_requires 'Sledge;:Exceptions';
 test_requires 'YAML';
 author_tests 'xt';
 use_test_base;

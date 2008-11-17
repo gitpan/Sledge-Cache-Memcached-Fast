@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 plan skip_all => 'please set $ENV{LIVE_TEST}' unless $ENV{LIVE_TEST};
-plan tests => 2;
+plan tests => 9;
 use Sledge::Cache::Memcached::Fast;
 
 {
@@ -24,6 +24,19 @@ use Sledge::Cache::Memcached::Fast;
         is $cache->param('foo'), 'bar';
         $cache->remove('foo');
         is $cache->param('foo'), undef;
+        $cache->param('foo' => 'boe');
+
+        $cache->set(cnt => 0);
+        is $cache->incr('cnt'), 1;
+        is $cache->incr('cnt'), 2;
+        is $cache->incr('cnt'), 3;
+        is $cache->incr('cnt', 2), 5;
+        is $cache->decr('cnt'), 4;
+
+        is_deeply $cache->get_multi(qw/foo cnt/), {foo => 'boe', cnt => 4};
+
+        $cache->set_multi([eee => 'ccc'], ['boo' => 'bae']);
+        is_deeply $cache->get_multi(qw/eee boo/), {eee => 'ccc', boo => 'bae'};
     }
 }
 
