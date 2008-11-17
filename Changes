@@ -1,5 +1,9 @@
 Revision history for Perl extension Sledge::Cache::Memcached::Fast
 
+0.04
+
+        - support these methods: cas cas_multi add add_multi replace replace_multi append append_multi prepend prepend_multi get_multi gets gets_multi incr_multi decr_multi delete flush_all
+
 0.03
 
         - fixed deps
