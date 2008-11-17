@@ -4,7 +4,7 @@ use warnings;
 require Sledge::Cache;
 use base 'Sledge::Cache';
 use 5.00800;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 use Cache::Memcached::Fast;
 
 our $Expires = 24 * 60 * 60; # 24hour

@@ -3,7 +3,8 @@ abstract: 'Cache::Memcached::Fast bindings for Sledge::Cache'
 author:
   - 'Tokuhiro Matsuno <tokuhirom AAJKLFJEF GMAIL COM>'
 build_requires:
-  Sledge;:Exceptions: 0
+  Sledge::Exception: 0
+  Sledge::Exceptions: 0
   Test::More: 0
   YAML: 0
 distribution_type: module
@@ -19,8 +20,10 @@ no_index:
     - t
 requires:
   Cache::Memcached::Fast: 0.1
+  Class::Data::Inheritable: 0
+  Error::Simple: 0
   Sledge::Cache: 0.04
   perl: 5.8.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.02
+version: 0.03
